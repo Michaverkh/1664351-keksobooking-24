@@ -18,33 +18,60 @@ function getRandomPositiveInteger (a, b) {
   return Math.floor(result);
 }
 
+let numbers = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 let types = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-let checkinTime = ['12:00', '13:00', '14:00'];
-let checkoutTime = ['12:00', '13:00', '14:00'];
+let time = ['12:00', '13:00', '14:00'];
 let allFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 let allPhotos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
-let testObj = {
-  autor: '',
-  avatar: 'img/avatars/user{{xx}}.png', //{{xx}} — это число от 01 до 10
-  offer: {
-    title: 'Квартира',
-    address: '', //составляется из географических координат {{location.lat}}, {{location.lng}}
-    price: '', //Случайное целое положительное число
-    type: '', //см массив types
-    rooms: '', //Случайное целое положительное число
-    guests: '', //Случайное целое положительное число
-    checkin: '', //см массив checkinTime
-    checkout: '', //см массив checkoutTime
-    features: '', //массив строк — массив случайной длины
-    description: 'Все по-кайфу!',
-    photos: '', //— массив случайной длины
-  },
-  location: {
-    lat: 0, //число с плавающей точкой — широта, случайное значение от 35.65000 до 35.70000
-    lng: 0, //число с плавающей точкой — долгота, случайное значение от 139.70000 до 139.80000
-  },
-};
+const maxPrice = 1000;
+const maxRoomsQuantity = 5;
+const maxGuestsQuantity = 10;
+
+const createAd = (index) => {
+  const getRandomLengthArr = (array) =>{
+    let RandomLengthArr = [];
+    let randomIndex = getRandomPositiveInteger(0, array.length);
+    for (let i = 0; i < randomIndex; i++) {
+      RandomLengthArr.push(array[i]);
+    }
+    return RandomLengthArr;
+  }
+
+  let latPoint = getRandomPositiveFloat (35.65, 35.7, 5);
+  let lngPoint = getRandomPositiveFloat (139.7, 139.8, 5);
+
+  return {
+    autor: {
+      avatar: 'img/avatars/user'+numbers[index]+'.png'
+    },
+    offer: {
+      title: 'Квартира',
+      address: [latPoint, lngPoint],
+      price: getRandomPositiveInteger (0, maxPrice),
+      type: types[getRandomPositiveInteger (0, types.length-1)],
+      rooms: getRandomPositiveInteger (0, maxRoomsQuantity),
+      guests: getRandomPositiveInteger (0, maxGuestsQuantity),
+      checkin: time[getRandomPositiveInteger (0, time.length-1)],
+      checkout: time[getRandomPositiveInteger (0, time.length-1)],
+      features: getRandomLengthArr(allFeatures),
+      description: 'Все по-кайфу!',
+      photos: getRandomLengthArr(allPhotos),
+    },
+    location: {
+      lat: latPoint,
+      lng: lngPoint,
+    }
+  }
+}
+
+const adsCount = 10;
+const similarAds = [];
+for (let j = 0; j < adsCount; j++) {
+  similarAds.push(createAd(j));
+}
+
+console.log(similarAds);
