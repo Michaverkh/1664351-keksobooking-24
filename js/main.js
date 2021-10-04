@@ -1,4 +1,5 @@
-// eslint-disable-next-line id-length
+/* eslint-disable id-length */
+
 function getRandomPositiveFloat (a, b, digits = 1) {
 
   const lower = Math.min(Math.abs(a), Math.abs(b));
