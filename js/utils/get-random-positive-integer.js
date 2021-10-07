@@ -30,3 +30,5 @@ function getRandomPositiveInteger (a, b) {
 
 getRandomPositiveInteger(2, 4);
 
+export {getRandomPositiveInteger};
+
