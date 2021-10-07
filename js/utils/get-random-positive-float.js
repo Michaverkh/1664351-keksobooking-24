@@ -23,3 +23,5 @@ function getRandomPositiveFloat (a, b, digits = 1) {
 }
 
 getRandomPositiveFloat(1, 3, 2);
+
+export {getRandomPositiveFloat};
