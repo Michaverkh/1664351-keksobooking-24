@@ -1,5 +1,6 @@
-import {getRandomPositiveFloat} from './utils/get-random-positive-float.js';
-import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
+import {getRandomPositiveFloat} from './utils/numbers.js';
+import {getRandomPositiveInteger} from './utils/numbers.js';
+import {getRandomLengthArr} from './utils/random-array.js';
 
 const NUMBERS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -16,16 +17,6 @@ const TITLES = ['Кошкин дом', 'У Мурки', 'cat paradise resort and
 const MAX_PRICE = 1000;
 const MAX_ROOMS_QUANTITY = 5;
 const MAX_GUESTS_QUANTITY = 10;
-
-const getRandomLengthArr = (array) =>{
-  const randomLengthArr = [];
-  const randomIndex = getRandomPositiveInteger(0, array.length);
-  // eslint-disable-next-line id-length
-  for (let i = 0; i < randomIndex; i++) {
-    randomLengthArr.push(array[i]);
-  }
-  return randomLengthArr;
-};
 
 const createAd = (index) => {
   const latPoint = getRandomPositiveFloat(35.65, 35.7, 5);
@@ -55,15 +46,4 @@ const createAd = (index) => {
   };
 };
 
-const ADS_COUNT = 10;
-// eslint-disable-next-line prefer-const
-let similarAds = [];
-// eslint-disable-next-line id-length
-for (let j = 0; j < ADS_COUNT; j++) {
-  similarAds.push(createAd(j));
-}
-
-// eslint-disable-next-line no-console
-console.log(similarAds);
-
-export {similarAds};
+export {createAd};
