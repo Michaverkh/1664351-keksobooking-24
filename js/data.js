@@ -46,4 +46,11 @@ const createAd = (index) => {
   };
 };
 
-export {createAd};
+const ADS_COUNT = 10;
+const similarAds = [];
+
+for (let j = 0; j < ADS_COUNT; j++) {
+  similarAds.push(createAd(j));
+}
+
+export {similarAds};
