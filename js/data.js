@@ -13,7 +13,7 @@ const ALL_PHOTOS = [
 ];
 const DESCRIPTIONS = ['Все по кайфу', 'Вид на море', 'Собак не селим', 'только для породистых котов', 'обед включен', 'у нас чисто',
   'у нас так-себе, зато дешево',' магаз рядом', 'кафе рядом', 'мыши в номере'];
-const TITLES = ['Кошкин дом', 'У Мурки', 'cat paradise resort and SPA'];
+const TITLES = ['Кошкин дом', 'У Мурки', 'Cat paradise resort and SPA'];
 const MAX_PRICE = 1000;
 const MAX_ROOMS_QUANTITY = 5;
 const MAX_GUESTS_QUANTITY = 10;
@@ -23,7 +23,7 @@ const createAd = (index) => {
   const lngPoint = getRandomPositiveFloat(139.7, 139.8, 5);
 
   return {
-    autor: {
+    author: {
       avatar: `img/avatars/user${ NUMBERS[index]}.png`,
     },
     offer: {
@@ -46,4 +46,11 @@ const createAd = (index) => {
   };
 };
 
-export {createAd};
+const ADS_COUNT = 1;
+const similarAds = [];
+
+for (let j = 0; j < ADS_COUNT; j++) {
+  similarAds.push(createAd(j));
+}
+
+export {similarAds};
