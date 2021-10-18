@@ -1,3 +1,5 @@
+import {similarAds} from './data.js';
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -20,3 +22,66 @@ const makePageAviable = () => {
 };
 
 makePageAviable();
+
+//Валидация заголовка
+
+const titleInput = document.querySelector('#title');
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+const valueLength = titleInput.value.lenght;
+
+titleInput.addEventListener('input', () => {
+  if (valueLength < MIN_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Ещё ${  MIN_TITLE_LENGTH - valueLength } симв.`);
+  } else if (valueLength > MAX_TITLE_LENGTH) {
+    titleInput.setCustomValidity(`Удалите лишнее ${ valueLength - MAX_TITLE_LENGTH  } симв.`);
+  } else {
+    titleInput.setCustomValidity('');
+  }
+
+  titleInput.reportValidity();
+});
+
+// Валидация цены за ночь
+let houseType;
+let minPrice = 0;
+
+similarAds.forEach((ad) => {
+  houseType = ad.offer.type;
+  switch (houseType) {
+    case 'flat':
+      minPrice = 1000;
+      break;
+    case 'house':
+      minPrice = 5000;
+      break;
+    case 'bungalow':
+      minPrice = 0;
+      break;
+    case 'hotel':
+      minPrice = 3000;
+      break;
+    case 'palace':
+      minPrice = 10000;
+      break;
+  }
+  return minPrice;
+});
+
+const priceInput = document.querySelector('#price');
+
+priceInput.addEventListener('invalid', () => {
+  if (priceInput.value > minPrice) {
+    priceInput.setCustomValidity(`Максимальное значение — ${minPrice}`);
+  }
+});
+
+/*Валидация кол-во комнат и мест.
+Кол-во комнат влияет на кол-во гостей!
+1 комната — «для 1 гостя»;
+2 комнаты — «для 2 гостей» или «для 1 гостя»;
+3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
+100 комнат — «не для гостей».
+*/
+
+

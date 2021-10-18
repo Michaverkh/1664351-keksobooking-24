@@ -31,7 +31,10 @@ similarAds.forEach((ad) => {
   CARD_ELEMENT.querySelector('.popup__title').textContent = ad.offer.title;
   CARD_ELEMENT.querySelector('.popup__text--address').textContent = ad.offer.address;
   CARD_ELEMENT.querySelector('.popup__text--price').textContent = `${ad.offer.price}₽/ночь`;
-  CARD_ELEMENT.querySelector('.popup__type').textContent = TRANSLATE[ad.offer.type];
+  const houseType = CARD_ELEMENT.querySelector('.popup__type');
+
+  houseType.textContent = TRANSLATE[ad.offer.type];
+
   CARD_ELEMENT.querySelector('.popup__text--capacity').textContent = `${ad.offer.rooms} комнаты для ${ad.offer.guests} гостей`;
   CARD_ELEMENT.querySelector('.popup__text--time').textContent = `Заезд после ${ad.offer.checkin}, выезд до ${ad.offer.checkout}`;
 
