@@ -43,12 +43,12 @@ titleInput.addEventListener('input', () => {
 });
 
 // Валидация цены за ночь
-let houseType;
-let minPrice = 0;
 
-similarAds.forEach((ad) => {
-  houseType = ad.offer.type;
-  switch (houseType) {
+let minPrice = 0;
+const houseType = document.querySelector('#type');
+
+houseType.addEventListener('change', () => {
+  switch (houseType.value) {
     case 'flat':
       minPrice = 1000;
       break;
@@ -65,15 +65,18 @@ similarAds.forEach((ad) => {
       minPrice = 10000;
       break;
   }
-  return minPrice;
 });
 
 const priceInput = document.querySelector('#price');
 
-priceInput.addEventListener('invalid', () => {
-  if (priceInput.value > minPrice) {
-    priceInput.setCustomValidity(`Максимальное значение — ${minPrice}`);
+priceInput.addEventListener('input', () => {
+  if (priceInput.value < minPrice) {
+    priceInput.setCustomValidity(`Минимальное значение — ${minPrice}`);
+  } else {
+    priceInput.setCustomValidity('');
   }
+
+  priceInput.reportValidity();
 });
 
 /*Валидация кол-во комнат и мест.
@@ -84,4 +87,29 @@ priceInput.addEventListener('invalid', () => {
 100 комнат — «не для гостей».
 */
 
+const roomQuantity = document.querySelector('#room_number');
+const guestQuantity = document.querySelector('#capacity');
 
+guestQuantity.addEventListener('change', () => {
+  if (roomQuantity.value === '1' && guestQuantity.value !== '1') {
+    guestQuantity.setCustomValidity('1 комната — «для 1 гостя»');
+    console.log('1 комната — «для 1 гостя»');
+
+  } else if (roomQuantity.value === '2' && guestQuantity.value !== '2' && guestQuantity.value !== '1') {
+    guestQuantity.setCustomValidity('2 комнаты — «для 2 гостей» или «для 1 гостя»');
+    console.log('2 комнаты — «для 2 гостей» или «для 1 гостя»');
+
+  } else if (roomQuantity.value === '3' && guestQuantity.value === '0') {
+    guestQuantity.setCustomValidity('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
+    console.log('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
+
+  } else if (roomQuantity.value === '100' && guestQuantity.value !== '0') {
+    guestQuantity.setCustomValidity('100 комнат — «не для гостей»');
+    console.log('100 комнат — «не для гостей»');
+
+  } else {
+    guestQuantity.setCustomValidity('');
+  }
+
+  guestQuantity.reportValidity();
+});
