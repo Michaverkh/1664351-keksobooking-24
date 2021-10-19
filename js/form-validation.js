@@ -1,5 +1,3 @@
-import {similarAds} from './data.js';
-
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -93,19 +91,15 @@ const guestQuantity = document.querySelector('#capacity');
 guestQuantity.addEventListener('change', () => {
   if (roomQuantity.value === '1' && guestQuantity.value !== '1') {
     guestQuantity.setCustomValidity('1 комната — «для 1 гостя»');
-    console.log('1 комната — «для 1 гостя»');
 
   } else if (roomQuantity.value === '2' && guestQuantity.value !== '2' && guestQuantity.value !== '1') {
     guestQuantity.setCustomValidity('2 комнаты — «для 2 гостей» или «для 1 гостя»');
-    console.log('2 комнаты — «для 2 гостей» или «для 1 гостя»');
 
   } else if (roomQuantity.value === '3' && guestQuantity.value === '0') {
     guestQuantity.setCustomValidity('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
-    console.log('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
 
   } else if (roomQuantity.value === '100' && guestQuantity.value !== '0') {
     guestQuantity.setCustomValidity('100 комнат — «не для гостей»');
-    console.log('100 комнат — «не для гостей»');
 
   } else {
     guestQuantity.setCustomValidity('');
