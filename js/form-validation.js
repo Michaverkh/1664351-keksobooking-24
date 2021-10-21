@@ -44,6 +44,7 @@ titleInput.addEventListener('input', () => {
 
 let minPrice = 0;
 const houseType = document.querySelector('#type');
+const priceInput = document.querySelector('#price');
 
 houseType.addEventListener('change', () => {
   switch (houseType.value) {
@@ -63,9 +64,9 @@ houseType.addEventListener('change', () => {
       minPrice = 10000;
       break;
   }
-});
 
-const priceInput = document.querySelector('#price');
+  priceInput.setAttribute('placeholder', minPrice);
+});
 
 priceInput.addEventListener('input', () => {
   if (priceInput.value < minPrice) {
@@ -106,4 +107,17 @@ guestQuantity.addEventListener('change', () => {
   }
 
   guestQuantity.reportValidity();
+});
+
+//Валидация кол-во комнат и мест.
+
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
+
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
 });
