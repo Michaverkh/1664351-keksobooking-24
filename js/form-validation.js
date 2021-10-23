@@ -68,10 +68,12 @@ const getMinPrice = () => {
 
 getMinPrice();
 priceInput.setAttribute('placeholder', minPrice);
+priceInput.setAttribute('min', minPrice);
 
 houseType.addEventListener('change', () => {
   getMinPrice();
   priceInput.setAttribute('placeholder', minPrice);
+  priceInput.setAttribute('min', minPrice);
 });
 
 priceInput.addEventListener('input', () => {
