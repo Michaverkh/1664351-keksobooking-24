@@ -42,10 +42,10 @@ titleInput.addEventListener('input', () => {
 
 // Валидация цены за ночь
 
-let minPrice = 0;
 const houseType = document.querySelector('#type');
-
-houseType.addEventListener('change', () => {
+const priceInput = document.querySelector('#price');
+let minPrice = 0;
+const getMinPrice = () => {
   switch (houseType.value) {
     case 'flat':
       minPrice = 1000;
@@ -63,9 +63,18 @@ houseType.addEventListener('change', () => {
       minPrice = 10000;
       break;
   }
-});
+  return minPrice;
+};
 
-const priceInput = document.querySelector('#price');
+getMinPrice();
+priceInput.setAttribute('placeholder', minPrice);
+priceInput.setAttribute('min', minPrice);
+
+houseType.addEventListener('change', () => {
+  getMinPrice();
+  priceInput.setAttribute('placeholder', minPrice);
+  priceInput.setAttribute('min', minPrice);
+});
 
 priceInput.addEventListener('input', () => {
   if (priceInput.value < minPrice) {
@@ -87,8 +96,7 @@ priceInput.addEventListener('input', () => {
 
 const roomQuantity = document.querySelector('#room_number');
 const guestQuantity = document.querySelector('#capacity');
-
-guestQuantity.addEventListener('change', () => {
+const getGuestsQuantity = () => {
   if (roomQuantity.value === '1' && guestQuantity.value !== '1') {
     guestQuantity.setCustomValidity('1 комната — «для 1 гостя»');
 
@@ -106,4 +114,24 @@ guestQuantity.addEventListener('change', () => {
   }
 
   guestQuantity.reportValidity();
+};
+
+guestQuantity.addEventListener('change', () => {
+  getGuestsQuantity();
+});
+roomQuantity.addEventListener('change', () => {
+  getGuestsQuantity();
+});
+getGuestsQuantity();
+//Валидация кол-во комнат и мест.
+
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
+
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
 });
