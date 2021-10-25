@@ -6,3 +6,4 @@ import './form-validation.js';
 import './address-choosing.js';
 import './ads-comparation.js';
 import './card-creation.js';
+import './map.js';

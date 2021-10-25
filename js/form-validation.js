@@ -19,8 +19,6 @@ const makePageAviable = () => {
   filters.forEach((filter) => filter.removeAttribute('disabled', true));
 };
 
-makePageAviable();
-
 //Валидация заголовка
 
 const titleInput = document.querySelector('#title');
@@ -135,3 +133,5 @@ timeIn.addEventListener('change', () => {
 timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
+
+export {makePageAviable};

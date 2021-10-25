@@ -46,7 +46,7 @@ const createAd = (index) => {
   };
 };
 
-const ADS_COUNT = 1;
+const ADS_COUNT = 10;
 const similarAds = [];
 
 for (let j = 0; j < ADS_COUNT; j++) {

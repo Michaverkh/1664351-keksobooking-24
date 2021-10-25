@@ -1,9 +1,6 @@
-import {similarAds} from './data.js';
-
 const CARD_TEMPLATE = document.querySelector('#card').content;
-const MAP = document.querySelector('.map__canvas');
+// const MAP = document.querySelector('.map__canvas');
 
-const similarAdsFragment = document.createDocumentFragment();
 const TRANSLATE = {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -25,7 +22,7 @@ const getFiltredElements = (template, features) => {
   });
 };
 
-similarAds.forEach((ad) => {
+const customPopup = (ad) => {
   const cardElement = CARD_TEMPLATE.cloneNode(true);
 
   cardElement.querySelector('.popup__avatar').src = ad.author.avatar;
@@ -59,8 +56,7 @@ similarAds.forEach((ad) => {
     });
     popupPhotoItem.remove();
   }
+  return cardElement;
+};
 
-  similarAdsFragment.appendChild(cardElement);
-});
-
-MAP.appendChild(similarAdsFragment);
+export {customPopup};
