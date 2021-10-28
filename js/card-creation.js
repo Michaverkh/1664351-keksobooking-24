@@ -1,4 +1,4 @@
-const CARD_TEMPLATE = document.querySelector('#card').content;
+const CARD_TEMPLATE = document.querySelector('#card').content.querySelector('.popup');
 // const MAP = document.querySelector('.map__canvas');
 
 const TRANSLATE = {
