@@ -1,5 +1,4 @@
 import {makePageAviable} from './form-validation.js';
-import {similarAds} from './data.js';
 import {customPopup} from './card-creation.js';
 
 const map = L.map('map-canvas')
@@ -50,18 +49,20 @@ marker.on('moveend', (evt) => {
 });
 
 //Отрисовка меток
-
-similarAds.forEach((point) => {
-  // eslint-disable-next-line no-shadow
-  const marker = L.marker({
-    lat: point.location.lat,
-    lng: point.location.lng,
-  },
-  {
-    icon: pinIcon,
+const renderSimilarAds = (someAds) => {
+  someAds.forEach((point) => {
+    // eslint-disable-next-line no-shadow
+    const marker = L.marker({
+      lat: point.location.lat,
+      lng: point.location.lng,
+    },
+    {
+      icon: pinIcon,
+    });
+    marker
+      .addTo(map)
+      .bindPopup(customPopup(point));
   });
-  marker
-    .addTo(map)
-    .bindPopup(customPopup(point));
-});
+};
 
+export {renderSimilarAds};

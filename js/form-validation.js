@@ -121,6 +121,7 @@ roomQuantity.addEventListener('change', () => {
   getGuestsQuantity();
 });
 getGuestsQuantity();
+
 //Валидация кол-во комнат и мест.
 
 const timeIn = document.querySelector('#timein');
@@ -135,3 +136,23 @@ timeOut.addEventListener('change', () => {
 });
 
 export {makePageAviable};
+
+//Отправка формы.
+
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://24.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then(() => onSuccess());
+  });
+};
+
+export {setUserFormSubmit};

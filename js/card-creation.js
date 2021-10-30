@@ -39,22 +39,28 @@ const customPopup = (ad) => {
   const popupFeatures = cardElement.querySelector('.popup__features');
   const popupFeatureItems = popupFeatures.querySelectorAll('.popup__feature');
 
-  getFiltredElements(popupFeatureItems, ad.offer.features);
+  // eslint-disable-next-line no-prototype-builtins
+  if(ad.offer.hasOwnProperty('features')) {
+    getFiltredElements(popupFeatureItems, ad.offer.features);
+  }
 
   cardElement.querySelector('.popup__description').textContent = ad.offer.description;
   const popupPhotos = cardElement.querySelector('.popup__photos'); //Блок с фотографиями
   const popupPhotoItem = cardElement.querySelector('.popup__photo'); //сама фотография
   const {photos} = ad.offer;
 
-  if (photos.length === 0) {
-    popupPhotoItem.remove();
-  } else {
-    photos.forEach((photo) => {
-      const newPhoto = popupPhotoItem.cloneNode(true);
-      newPhoto.src = photo;
-      popupPhotos.appendChild(newPhoto);
-    });
-    popupPhotoItem.remove();
+  // eslint-disable-next-line no-prototype-builtins
+  if(ad.offer.hasOwnProperty('photos')) {
+    if (photos.length === 0) {
+      popupPhotoItem.remove();
+    } else {
+      photos.forEach((photo) => {
+        const newPhoto = popupPhotoItem.cloneNode(true);
+        newPhoto.src = photo;
+        popupPhotos.appendChild(newPhoto);
+      });
+      popupPhotoItem.remove();
+    }
   }
   return cardElement;
 };

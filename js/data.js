@@ -1,3 +1,4 @@
+
 import {getRandomPositiveFloat} from './utils/numbers.js';
 import {getRandomPositiveInteger} from './utils/numbers.js';
 import {getRandomLengthArr} from './utils/random-array.js';
@@ -54,3 +55,4 @@ for (let j = 0; j < ADS_COUNT; j++) {
 }
 
 export {similarAds};
+
