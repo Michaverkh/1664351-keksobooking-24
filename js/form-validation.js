@@ -1,3 +1,6 @@
+// import {returnMainPin} from './map.js';
+// import {closePopups} from './map.js';
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -136,23 +139,4 @@ timeOut.addEventListener('change', () => {
 });
 
 export {makePageAviable};
-
-//Отправка формы.
-
-const setUserFormSubmit = (onSuccess) => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://24.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    ).then(() => onSuccess());
-  });
-};
-
-export {setUserFormSubmit};
+export {adForm};

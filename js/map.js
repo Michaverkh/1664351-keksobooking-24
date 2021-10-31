@@ -25,8 +25,8 @@ const mainPinIcon = L.icon({
 
 const pinIcon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
 
 const marker = L.marker(
@@ -65,4 +65,17 @@ const renderSimilarAds = (someAds) => {
   });
 };
 
+//закрытие попапов
+
+const closePopups = () => map.closePopup();
+
+//Обнуление метки
+
+function returnMainPin() {
+  marker.lng = 139.78156;
+  marker.lat = 35.65929;
+}
+
+export {returnMainPin};
+export {closePopups};
 export {renderSimilarAds};
