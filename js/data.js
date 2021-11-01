@@ -1,3 +1,4 @@
+
 import {getRandomPositiveFloat} from './utils/numbers.js';
 import {getRandomPositiveInteger} from './utils/numbers.js';
 import {getRandomLengthArr} from './utils/random-array.js';
@@ -46,7 +47,7 @@ const createAd = (index) => {
   };
 };
 
-const ADS_COUNT = 1;
+const ADS_COUNT = 10;
 const similarAds = [];
 
 for (let j = 0; j < ADS_COUNT; j++) {
@@ -54,3 +55,4 @@ for (let j = 0; j < ADS_COUNT; j++) {
 }
 
 export {similarAds};
+

@@ -1,3 +1,6 @@
+// import {returnMainPin} from './map.js';
+// import {closePopups} from './map.js';
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -18,8 +21,6 @@ const makePageAviable = () => {
   mapFilters.classList.remove('map__filters--disabled');
   filters.forEach((filter) => filter.removeAttribute('disabled', true));
 };
-
-makePageAviable();
 
 //Валидация заголовка
 
@@ -123,6 +124,7 @@ roomQuantity.addEventListener('change', () => {
   getGuestsQuantity();
 });
 getGuestsQuantity();
+
 //Валидация кол-во комнат и мест.
 
 const timeIn = document.querySelector('#timein');
@@ -135,3 +137,6 @@ timeIn.addEventListener('change', () => {
 timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
+
+export {makePageAviable};
+export {adForm};

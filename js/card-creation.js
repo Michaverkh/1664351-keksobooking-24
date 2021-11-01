@@ -1,9 +1,6 @@
-import {similarAds} from './data.js';
+const CARD_TEMPLATE = document.querySelector('#card').content.querySelector('.popup');
+// const MAP = document.querySelector('.map__canvas');
 
-const CARD_TEMPLATE = document.querySelector('#card').content;
-const MAP = document.querySelector('.map__canvas');
-
-const similarAdsFragment = document.createDocumentFragment();
 const TRANSLATE = {
   palace: 'Дворец',
   flat: 'Квартира',
@@ -25,7 +22,7 @@ const getFiltredElements = (template, features) => {
   });
 };
 
-similarAds.forEach((ad) => {
+const customPopup = (ad) => {
   const cardElement = CARD_TEMPLATE.cloneNode(true);
 
   cardElement.querySelector('.popup__avatar').src = ad.author.avatar;
@@ -42,25 +39,30 @@ similarAds.forEach((ad) => {
   const popupFeatures = cardElement.querySelector('.popup__features');
   const popupFeatureItems = popupFeatures.querySelectorAll('.popup__feature');
 
-  getFiltredElements(popupFeatureItems, ad.offer.features);
+  // eslint-disable-next-line no-prototype-builtins
+  if(ad.offer.hasOwnProperty('features')) {
+    getFiltredElements(popupFeatureItems, ad.offer.features);
+  }
 
   cardElement.querySelector('.popup__description').textContent = ad.offer.description;
   const popupPhotos = cardElement.querySelector('.popup__photos'); //Блок с фотографиями
   const popupPhotoItem = cardElement.querySelector('.popup__photo'); //сама фотография
   const {photos} = ad.offer;
 
-  if (photos.length === 0) {
-    popupPhotoItem.remove();
-  } else {
-    photos.forEach((photo) => {
-      const newPhoto = popupPhotoItem.cloneNode(true);
-      newPhoto.src = photo;
-      popupPhotos.appendChild(newPhoto);
-    });
-    popupPhotoItem.remove();
+  // eslint-disable-next-line no-prototype-builtins
+  if(ad.offer.hasOwnProperty('photos')) {
+    if (photos.length === 0) {
+      popupPhotoItem.remove();
+    } else {
+      photos.forEach((photo) => {
+        const newPhoto = popupPhotoItem.cloneNode(true);
+        newPhoto.src = photo;
+        popupPhotos.appendChild(newPhoto);
+      });
+      popupPhotoItem.remove();
+    }
   }
+  return cardElement;
+};
 
-  similarAdsFragment.appendChild(cardElement);
-});
-
-MAP.appendChild(similarAdsFragment);
+export {customPopup};
