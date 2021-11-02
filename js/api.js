@@ -1,7 +1,5 @@
 import {renderSimilarAds} from './map.js';
 import { showAlert } from './alert-message.js';
-import {returnMainPin} from './map.js';
-import {closePopups} from './map.js';
 import {adForm} from './form-validation.js';
 
 const getData = () => {
@@ -18,31 +16,24 @@ const getData = () => {
 };
 
 const setUserFormSubmit = (onSuccess, onError) => {
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  const formData = new FormData(adForm);
 
-    const formData = new FormData(evt.target);
-
-    fetch(
-      'https://24.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    ).then((response) => {
-      if (response.ok) {
-        onSuccess();
-        evt.target.reset();
-        returnMainPin();
-        closePopups();
-      } else {
-        onError();
-      }
-    })
-      .catch(() => {
-        onError();
-      });
-  });
+  fetch(
+    'https://24.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  ).then((response) => {
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onError();
+    }
+  })
+    .catch(() => {
+      onError();
+    });
 };
 
 export {setUserFormSubmit};

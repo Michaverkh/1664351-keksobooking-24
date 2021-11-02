@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 const CARD_TEMPLATE = document.querySelector('#card').content.querySelector('.popup');
 // const MAP = document.querySelector('.map__canvas');
 
@@ -39,7 +40,6 @@ const customPopup = (ad) => {
   const popupFeatures = cardElement.querySelector('.popup__features');
   const popupFeatureItems = popupFeatures.querySelectorAll('.popup__feature');
 
-  // eslint-disable-next-line no-prototype-builtins
   if(ad.offer.hasOwnProperty('features')) {
     getFiltredElements(popupFeatureItems, ad.offer.features);
   }
@@ -49,7 +49,6 @@ const customPopup = (ad) => {
   const popupPhotoItem = cardElement.querySelector('.popup__photo'); //сама фотография
   const {photos} = ad.offer;
 
-  // eslint-disable-next-line no-prototype-builtins
   if(ad.offer.hasOwnProperty('photos')) {
     if (photos.length === 0) {
       popupPhotoItem.remove();
