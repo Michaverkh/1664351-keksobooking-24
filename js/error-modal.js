@@ -7,19 +7,26 @@ const footerElement = document.querySelector('.footer');
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    errorModalElement.remove();
+    closeErrorModule();
   }
 };
 
 const onPopupClick = (evt) => {
   evt.preventDefault();
-  errorModalElement.remove();
+  closeErrorModule();
 };
 
-const openErrorModule = () => {
+function openErrorModule () {
   footerElement.after(errorModalElement);
   document.addEventListener('keydown', onPopupEscKeydown);
   document.addEventListener('click', onPopupClick);
-};
+}
+
+function closeErrorModule () {
+  errorModalElement.remove();
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', onPopupClick);
+}
 
 export {openErrorModule};
