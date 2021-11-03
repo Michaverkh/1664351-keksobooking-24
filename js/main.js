@@ -10,6 +10,7 @@ import './map.js';
 import './utils/keys.js';
 import './alert-message.js';
 import './api.js';
+import './reset-form-button.js';
 
 import {setUserFormSubmit} from './api.js';
 import {openSuccessModule} from './success-modal.js';
