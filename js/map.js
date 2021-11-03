@@ -72,8 +72,10 @@ const closePopups = () => map.closePopup();
 //Обнуление метки
 
 function returnMainPin() {
-  marker.lng = 139.78156;
-  marker.lat = 35.65929;
+  marker.setLatLng({
+    lat: 35.65929,
+    lng: 139.78156,
+  });
 }
 
 export {returnMainPin};

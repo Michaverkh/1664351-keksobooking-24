@@ -10,22 +10,30 @@ const footerElement = document.querySelector('.footer');
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    successModalElement.remove();
+    closeSuccessModule();
   }
 };
 
 const onPopupClick = (evt) => {
   evt.preventDefault();
-  successModalElement.remove();
+  closeSuccessModule();
 };
 
-const openSuccessModule = () => {
+function openSuccessModule () {
   footerElement.after(successModalElement);
+
   document.addEventListener('keydown', onPopupEscKeydown);
   document.addEventListener('click', onPopupClick);
+}
+
+function closeSuccessModule () {
   adForm.reset();
   returnMainPin();
   closePopups();
-};
+  successModalElement.remove();
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('click', onPopupClick);
+}
 
 export {openSuccessModule};
