@@ -49,6 +49,8 @@ marker.on('moveend', (evt) => {
 });
 
 //Отрисовка меток
+const markerGroup = L.layerGroup().addTo(map);
+
 const renderSimilarAds = (someAds) => {
   someAds.forEach((point) => {
     // eslint-disable-next-line no-shadow
@@ -60,14 +62,14 @@ const renderSimilarAds = (someAds) => {
       icon: pinIcon,
     });
     marker
-      .addTo(map)
+      .addTo(markerGroup)
       .bindPopup(customPopup(point));
   });
 };
 
 //закрытие попапов
 
-const closePopups = () => map.closePopup();
+const closePopups = () => map.closePopup(marker);
 
 //Обнуление метки
 
@@ -78,6 +80,11 @@ function returnMainPin() {
   });
 }
 
+//очистка карты
+
+const removeMarkers = () => markerGroup.clearLayers();
+
+export {removeMarkers};
 export {returnMainPin};
 export {closePopups};
 export {renderSimilarAds};
