@@ -51,7 +51,12 @@ marker.on('moveend', (evt) => {
 //Отрисовка меток
 const markerGroup = L.layerGroup().addTo(map);
 
+//очистка карты
+
+const removeMarkers = () => markerGroup.clearLayers();
+
 const renderSimilarAds = (someAds) => {
+  removeMarkers();
   someAds.forEach((point) => {
     // eslint-disable-next-line no-shadow
     const marker = L.marker({
@@ -80,11 +85,6 @@ function returnMainPin() {
   });
 }
 
-//очистка карты
-
-const removeMarkers = () => markerGroup.clearLayers();
-
-export {removeMarkers};
 export {returnMainPin};
 export {closePopups};
 export {renderSimilarAds};
