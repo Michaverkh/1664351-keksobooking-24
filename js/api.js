@@ -1,7 +1,6 @@
 import { showAlert } from './alert-message.js';
 import {getFilteredData} from './filter.js';
-import {ADS_COUNT} from './filter.js';
-// import {removeMarkers} from './map.js';
+import {setFeatureCick} from './map.js';
 import {renderSimilarAds} from './map.js';
 
 const getData = (onSuccess) => {
@@ -16,7 +15,8 @@ const getData = (onSuccess) => {
 };
 
 getData((ads) => {
-  renderSimilarAds(ads.slice(0, ADS_COUNT));
+  renderSimilarAds(ads);
+  setFeatureCick(() => renderSimilarAds(ads));
   getFilteredData(ads);
 });
 
