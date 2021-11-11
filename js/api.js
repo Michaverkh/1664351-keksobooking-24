@@ -1,28 +1,31 @@
-import {renderSimilarAds} from './map.js';
 import { showAlert } from './alert-message.js';
-import {adForm} from './form-validation.js';
+import {getFilteredData} from './filter.js';
+import {setFeatureCick} from './map.js';
+import {renderSimilarAds} from './map.js';
 
-const getData = () => {
-  const ADS_COUNT = 10;
-
+const getData = (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((ads) => {
-      renderSimilarAds(ads.slice(0, ADS_COUNT));
+    .then((data) => {
+      onSuccess(data);
     })
     .catch(() => {
       showAlert('произошла ошибка загрузки данных');
     });
 };
 
-const setUserFormSubmit = (onSuccess, onError) => {
-  const formData = new FormData(adForm);
+getData((ads) => {
+  renderSimilarAds(ads);
+  setFeatureCick(() => renderSimilarAds(ads));
+  getFilteredData(ads);
+});
 
+const setUserFormSubmit = (data, onSuccess, onError) => {
   fetch(
     'https://24.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
-      body: formData,
+      body: data,
     },
   ).then((response) => {
     if (response.ok) {
@@ -37,4 +40,3 @@ const setUserFormSubmit = (onSuccess, onError) => {
 };
 
 export {setUserFormSubmit};
-export {getData};

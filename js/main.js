@@ -11,16 +11,22 @@ import './utils/keys.js';
 import './alert-message.js';
 import './api.js';
 import './reset-form-button.js';
+import './filter.js';
 
 import {setUserFormSubmit} from './api.js';
 import {openSuccessModule} from './success-modal.js';
 import {openErrorModule} from './error-modal.js';
-import {getData} from './api.js';
+// import {getData} from './api.js';
 import {adForm} from './form-validation.js';
 
-getData();
+// getData();
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  setUserFormSubmit(openSuccessModule, openErrorModule);
+  const formData = new FormData(adForm);
+  setUserFormSubmit(formData, openSuccessModule, openErrorModule);
+});
+
+window.addEventListener('scroll', () => {
+  document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
 });

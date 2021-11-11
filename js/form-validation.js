@@ -1,6 +1,3 @@
-// import {returnMainPin} from './map.js';
-// import {closePopups} from './map.js';
-
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
