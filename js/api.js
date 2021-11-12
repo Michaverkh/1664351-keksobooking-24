@@ -1,8 +1,7 @@
 import { showAlert } from './alert-message.js';
-// import {getFilteredData} from './filter.js';
-import {setFeatureCick} from './map.js';
-import {renderSimilarAds} from './map.js';
-import {renderOriginalAds} from './map.js';
+import {getFilteredData} from './filter.js';
+import {setFeatureCick} from './filter.js';
+// import {renderSimilarAds} from './map.js';
 
 const getData = (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
@@ -16,9 +15,8 @@ const getData = (onSuccess) => {
 };
 
 getData((ads) => {
-  // let sortAds = ads;
-  renderOriginalAds(ads);
-  setFeatureCick(() => renderSimilarAds(ads));
+  getFilteredData(ads);
+  setFeatureCick(() => getFilteredData(ads));
 });
 
 const setUserFormSubmit = (data, onSuccess, onError) => {
