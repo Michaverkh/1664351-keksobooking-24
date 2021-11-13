@@ -55,6 +55,7 @@ const markerGroup = L.layerGroup().addTo(map);
 
 const ADS_COUNT = 10;
 const removeMarkers = () => markerGroup.clearLayers();
+
 const printPoints = (points) => {
   points.forEach((point) => {
     // eslint-disable-next-line no-shadow
@@ -78,7 +79,7 @@ const renderSimilarAds = (someAds) => {
 
 //закрытие попапов
 
-const closePopups = () => map.closePopup(marker);
+const closePopups = () => map.closePopup();
 
 //Обнуление метки
 
