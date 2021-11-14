@@ -40,7 +40,7 @@ const customPopup = (ad) => {
   const popupFeatures = cardElement.querySelector('.popup__features');
   const popupFeatureItems = popupFeatures.querySelectorAll('.popup__feature');
 
-  if(ad.offer.hasOwnProperty('features')) {
+  if('features' in ad.offer) {
     getFiltredElements(popupFeatureItems, ad.offer.features);
   }
 
@@ -49,7 +49,7 @@ const customPopup = (ad) => {
   const popupPhotoItem = cardElement.querySelector('.popup__photo'); //сама фотография
   const {photos} = ad.offer;
 
-  if(ad.offer.hasOwnProperty('photos')) {
+  if('photos' in ad.offer) {
     if (photos.length === 0) {
       popupPhotoItem.remove();
     } else {

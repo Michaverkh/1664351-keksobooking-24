@@ -68,24 +68,13 @@ const getFilteredData = (someAds) => {
   mapFilter.addEventListener('change', () => {
     let filteredAds = [];
 
-    const availebleRooms = [];
-
-    for (let i=1; i <= Number(housingRooms.value); i++) {
-      availebleRooms.push(i);
-    }
-
-    const availebleGuestsQuantity = [];
-
-    for (let i=1; i <= Number(housingGuests.value); i++) {
-      availebleGuestsQuantity.push(i);
-    }
-
     filteredAds = someAds.sort(compareAds).filter((item) => item.offer.type === housingType.value ||
     housingType.value === 'any').filter((item) => item.offer.price <= 10000 && housingPrice.value === 'low' ||
     item.offer.price > 10000 && item.offer.price <= 50000 && housingPrice.value === 'middle' ||
     50000 < item.offer.price && housingPrice.value === 'high' ||
-    housingPrice.value === 'any').filter((item) => availebleRooms.includes(item.offer.rooms) ||
-    housingRooms.value === 'any').filter((item) => availebleGuestsQuantity.includes(item.offer.guests) ||
+    housingPrice.value === 'any').filter((item) => item.offer.rooms === Number(housingRooms.value) ||
+    housingRooms.value === 'any').filter((item) => item.offer.guests >= Number(housingGuests.value) &&
+    housingGuests.value !== '0' ||
     housingGuests.value === 'any');
 
     renderSimilarAds(filteredAds);
