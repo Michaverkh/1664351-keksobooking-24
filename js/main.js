@@ -12,6 +12,8 @@ import './alert-message.js';
 import './api.js';
 import './reset-form-button.js';
 import './filter.js';
+import './utils/debounce.js';
+import './avatar.js';
 
 import {setUserFormSubmit} from './api.js';
 import {openSuccessModule} from './success-modal.js';

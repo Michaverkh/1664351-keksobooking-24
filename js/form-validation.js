@@ -84,13 +84,7 @@ priceInput.addEventListener('input', () => {
   priceInput.reportValidity();
 });
 
-/*Валидация кол-во комнат и мест.
-Кол-во комнат влияет на кол-во гостей!
-1 комната — «для 1 гостя»;
-2 комнаты — «для 2 гостей» или «для 1 гостя»;
-3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»;
-100 комнат — «не для гостей».
-*/
+//Валидация кол-во комнат и мест.
 
 const roomQuantity = document.querySelector('#room_number');
 const guestQuantity = document.querySelector('#capacity');
@@ -121,8 +115,6 @@ roomQuantity.addEventListener('change', () => {
   getGuestsQuantity();
 });
 getGuestsQuantity();
-
-//Валидация кол-во комнат и мест.
 
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');

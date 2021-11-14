@@ -2,13 +2,14 @@ import {renderSimilarAds} from './map.js';
 
 //Выбор опций
 
+const wiFi = document.querySelector('#filter-wifi');
+const dishwasher = document.querySelector('#filter-dishwasher');
+const parking = document.querySelector('#filter-parking');
+const washer = document.querySelector('#filter-washer');
+const elevator = document.querySelector('#filter-elevator');
+const conditioner = document.querySelector('#filter-conditioner');
+
 const getAdRank = (ad) => {
-  const wiFi = document.querySelector('#filter-wifi');
-  const dishwasher = document.querySelector('#filter-dishwasher');
-  const parking = document.querySelector('#filter-parking');
-  const washer = document.querySelector('#filter-washer');
-  const elevator = document.querySelector('#filter-elevator');
-  const conditioner = document.querySelector('#filter-conditioner');
 
   let rank =0;
 
@@ -51,13 +52,13 @@ const housingRooms = document.querySelector('#housing-rooms');
 const housingGuests = document.querySelector('#housing-guests');
 const mapFilter = document.querySelector('.map__filters');
 
-const setFeatureCick = (cb) => {
+const setFeatureClick = (cb) => {
   desiredFeatures.addEventListener('click', (evt) => {
     if(evt.target.matches('input[type="checkbox"]')) {
       const currentElem = evt.target;
       currentElem.classList.toggle('desired');
+      cb();
     }
-    cb();
   });
 };
 
@@ -67,12 +68,24 @@ const getFilteredData = (someAds) => {
   mapFilter.addEventListener('change', () => {
     let filteredAds = [];
 
+    const availebleRooms = [];
+
+    for (let i=1; i <= Number(housingRooms.value); i++) {
+      availebleRooms.push(i);
+    }
+
+    const availebleGuestsQuantity = [];
+
+    for (let i=1; i <= Number(housingGuests.value); i++) {
+      availebleGuestsQuantity.push(i);
+    }
+
     filteredAds = someAds.sort(compareAds).filter((item) => item.offer.type === housingType.value ||
     housingType.value === 'any').filter((item) => item.offer.price <= 10000 && housingPrice.value === 'low' ||
     item.offer.price > 10000 && item.offer.price <= 50000 && housingPrice.value === 'middle' ||
     50000 < item.offer.price && housingPrice.value === 'high' ||
-    housingPrice.value === 'any').filter((item) => item.offer.rooms === Number(housingRooms.value) ||
-    housingRooms.value === 'any').filter((item) => item.offer.guests === Number(housingGuests.value) ||
+    housingPrice.value === 'any').filter((item) => availebleRooms.includes(item.offer.rooms) ||
+    housingRooms.value === 'any').filter((item) => availebleGuestsQuantity.includes(item.offer.guests) ||
     housingGuests.value === 'any');
 
     renderSimilarAds(filteredAds);
@@ -80,4 +93,4 @@ const getFilteredData = (someAds) => {
 };
 
 export {getFilteredData};
-export {setFeatureCick};
+export {setFeatureClick};

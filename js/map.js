@@ -29,7 +29,7 @@ const pinIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-const marker = L.marker(
+const MainMarker = L.marker(
   {
     lat: 35.65929,
     lng: 139.78156,
@@ -40,13 +40,25 @@ const marker = L.marker(
   },
 );
 
-marker.addTo(map);
+MainMarker.addTo(map);
 
 const adressInput = document.querySelector('#address');
-marker.on('moveend', (evt) => {
-  const coordinates = evt.target.getLatLng();
+
+const getCoordinates = (marker) => {
+  const coordinates = marker.getLatLng();
   adressInput.value = `${(coordinates.lng).toFixed(5)}, ${coordinates.lat.toFixed(5)}`;
+};
+
+getCoordinates(MainMarker);
+
+MainMarker.on('moveend', (evt) => {
+  getCoordinates(evt.target);
 });
+
+// MainMarker.on('moveend', (evt) => {
+//   const coordinates = evt.target.getLatLng();
+//   adressInput.value = `${(coordinates.lng).toFixed(5)}, ${coordinates.lat.toFixed(5)}`;
+// });
 
 //Отрисовка меток
 const markerGroup = L.layerGroup().addTo(map);
@@ -58,7 +70,6 @@ const removeMarkers = () => markerGroup.clearLayers();
 
 const printPoints = (points) => {
   points.forEach((point) => {
-    // eslint-disable-next-line no-shadow
     const marker = L.marker({
       lat: point.location.lat,
       lng: point.location.lng,
@@ -84,10 +95,11 @@ const closePopups = () => map.closePopup();
 //Обнуление метки
 
 function returnMainPin() {
-  marker.setLatLng({
+  MainMarker.setLatLng({
     lat: 35.65929,
     lng: 139.78156,
   });
+  getCoordinates(MainMarker);
 }
 
 export {returnMainPin};
