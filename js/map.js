@@ -1,6 +1,11 @@
 import {makePageAviable} from './form-validation.js';
 import {customPopup} from './card-creation.js';
 
+const HOME_POSITION = {
+  lat: 35.65929,
+  lng: 139.78156,
+};
+
 const map = L.map('map-canvas')
   .on('load', () => {
     makePageAviable();
@@ -30,10 +35,7 @@ const pinIcon = L.icon({
 });
 
 const MainMarker = L.marker(
-  {
-    lat: 35.65929,
-    lng: 139.78156,
-  },
+  HOME_POSITION,
   {
     draggable: true,
     icon: mainPinIcon,
@@ -54,11 +56,6 @@ getCoordinates(MainMarker);
 MainMarker.on('moveend', (evt) => {
   getCoordinates(evt.target);
 });
-
-// MainMarker.on('moveend', (evt) => {
-//   const coordinates = evt.target.getLatLng();
-//   adressInput.value = `${(coordinates.lng).toFixed(5)}, ${coordinates.lat.toFixed(5)}`;
-// });
 
 //Отрисовка меток
 const markerGroup = L.layerGroup().addTo(map);
@@ -95,10 +92,7 @@ const closePopups = () => map.closePopup();
 //Обнуление метки
 
 function returnMainPin() {
-  MainMarker.setLatLng({
-    lat: 35.65929,
-    lng: 139.78156,
-  });
+  MainMarker.setLatLng(HOME_POSITION);
   getCoordinates(MainMarker);
 }
 

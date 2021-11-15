@@ -1,5 +1,8 @@
 import {renderSimilarAds} from './map.js';
 
+const MIN_PRICE = 10000;
+const MAX_PRICE = 50000;
+
 //Выбор опций
 
 const wiFi = document.querySelector('#filter-wifi');
@@ -69,9 +72,9 @@ const getFilteredData = (someAds) => {
     let filteredAds = [];
 
     filteredAds = someAds.sort(compareAds).filter((item) => item.offer.type === housingType.value ||
-    housingType.value === 'any').filter((item) => item.offer.price <= 10000 && housingPrice.value === 'low' ||
-    item.offer.price > 10000 && item.offer.price <= 50000 && housingPrice.value === 'middle' ||
-    50000 < item.offer.price && housingPrice.value === 'high' ||
+    housingType.value === 'any').filter((item) => item.offer.price <= MIN_PRICE && housingPrice.value === 'low' ||
+    item.offer.price > MIN_PRICE && item.offer.price <= MAX_PRICE && housingPrice.value === 'middle' ||
+    MAX_PRICE < item.offer.price && housingPrice.value === 'high' ||
     housingPrice.value === 'any').filter((item) => item.offer.rooms === Number(housingRooms.value) ||
     housingRooms.value === 'any').filter((item) => item.offer.guests >= Number(housingGuests.value) &&
     housingGuests.value !== '0' ||

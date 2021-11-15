@@ -3,6 +3,8 @@ import {getFilteredData} from './filter.js';
 import {setFeatureClick} from './filter.js';
 import {debounce} from './utils/debounce.js';
 
+const RERENDER_DELAY = 500;
+
 const getData = (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
@@ -13,8 +15,6 @@ const getData = (onSuccess) => {
       showAlert('произошла ошибка загрузки данных');
     });
 };
-
-const RERENDER_DELAY = 500;
 
 getData((ads) => {
   getFilteredData(ads);

@@ -1,3 +1,6 @@
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
+
 const adForm = document.querySelector('.ad-form');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -22,8 +25,6 @@ const makePageAviable = () => {
 //Валидация заголовка
 
 const titleInput = document.querySelector('#title');
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
 const valueLength = titleInput.value.lenght;
 
 titleInput.addEventListener('input', () => {
